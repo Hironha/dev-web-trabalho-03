@@ -1,0 +1,11 @@
+# ignore node_modules
+node_modules
+
+# ignore package-lock.json
+/package-lock.json
+
+# ignore dist directory
+/dist
+
+# Keep environment variables out of version control
+.env
