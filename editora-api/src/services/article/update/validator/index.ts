@@ -1,11 +1,19 @@
 import * as Yup from 'yup';
 
+import { ObjectValidator } from 'utility/object';
 import type { UpdateArticleArg } from '../types';
 
 export class UpdateArticleValidator {
-  constructor(private updateArg: UpdateArticleArg) {}
+  private entriesValidator: ObjectValidator<UpdateArticleArg>;
+
+  constructor(private updateArg: UpdateArticleArg) {
+    this.entriesValidator = new ObjectValidator(this.updateArg);
+  }
 
   public validate() {
+    if (!this.entriesValidator.compareProps(this.getPossibleEntries()))
+      throw new Error('');
+
     const validationSchema = this.getValidationSchema();
 
     try {
@@ -14,6 +22,18 @@ export class UpdateArticleValidator {
       const { errors } = err as Yup.ValidationError;
       console.error(errors);
     }
+  }
+
+  private getPossibleEntries(): Array<keyof UpdateArticleArg> {
+    return [
+      'author',
+      'id',
+      'is_active',
+      'published',
+      'published_at',
+      'summary',
+      'title',
+    ];
   }
 
   private getValidationSchema() {

@@ -1,11 +1,18 @@
 import prisma from 'services/prisma';
 
+import { UpdateArticleValidator } from './validator';
+
 import type { UpdateArticleArg } from './types';
 
 export class UpdateArticle {
-  constructor(private updateArg: UpdateArticleArg) {}
+  private validator: UpdateArticleValidator;
+  constructor(private updateArg: UpdateArticleArg) {
+    this.validator = new UpdateArticleValidator(this.updateArg);
+  }
 
   public async exec() {
+    this.validator.validate();
+
     const updatedArticle = await this.update();
 
     return updatedArticle;
@@ -22,7 +29,10 @@ export class UpdateArticle {
           updated_at: new Date(),
         },
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        throw new Error('');
+      });
 
     return updatedArticle;
   }

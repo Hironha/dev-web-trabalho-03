@@ -28,7 +28,10 @@ export class CreateArticle {
           uuid: uuidv4(),
         },
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        throw new Error('');
+      });
 
     return createdArticle;
   }

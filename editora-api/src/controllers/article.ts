@@ -9,19 +9,17 @@ import type { Controller } from 'types/controller';
 export const findAll: Controller = async (req, res) => {
   const findAllArticles = new FindAllArticles();
 
-  const articles = await findAllArticles.exec();
+  try {
+    const articles = await findAllArticles.exec();
 
-  res.status(200).json(articles);
+    res.status(200).json(articles);
+  } catch (err) {
+    res.status(500).json({ message: 'Algo de inesperado aconteceu.' });
+  }
 };
 
 export const createArticle: Controller = async (req, res) => {
-  const create = new CreateArticle({
-    author: req.body.author,
-    published: req.body.published,
-    published_at: req.body.published,
-    summary: req.body.summary,
-    title: req.body.title,
-  });
+  const create = new CreateArticle(req.body);
 
   try {
     const createdArticle = await create.exec();
@@ -34,15 +32,7 @@ export const createArticle: Controller = async (req, res) => {
 
 export const updateArticle: Controller = async (req, res) => {
   const { id } = req.params;
-  const update = new UpdateArticle({
-    id: Number(id),
-    author: req.body.author,
-    is_active: req.body.is_active,
-    published: req.body.published,
-    published_at: req.body.published_at,
-    summary: req.body.published,
-    title: req.body.title,
-  });
+  const update = new UpdateArticle({ ...req.body, id: Number(id) });
 
   try {
     const updatedArticle = await update.exec();
