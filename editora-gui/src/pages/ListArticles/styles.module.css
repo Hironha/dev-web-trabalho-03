@@ -1,4 +1,4 @@
-.articles-list {
-  padding: 2rem;
-  max-width: 500px;
+.list-container {
+  max-width: 85%;
+  margin: 16px auto;
 }
