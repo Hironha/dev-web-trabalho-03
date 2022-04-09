@@ -27,7 +27,6 @@ export class UpdateArticleValidator {
   private getPossibleEntries(): Array<keyof UpdateArticleArg> {
     return [
       'author',
-      'id',
       'is_active',
       'published',
       'published_at',
