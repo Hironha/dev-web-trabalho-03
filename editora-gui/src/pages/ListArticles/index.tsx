@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
-import Button from "react-bootstrap/Button";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
 
 import Loader from "components/Loader";
 
@@ -43,12 +44,31 @@ const ListArticles = (): JSX.Element => {
     fetchArticles();
   }, [isMounted]);
 
+  const deleteArticleHandler = (articleId: number) => {
+    return async () => {
+      try {
+        await Api.put(`/articles/update/${articleId}`, {
+          is_active: false,
+        });
+
+        if (!isMounted.current) return;
+
+        setArticles((prevState) => ({
+          ...prevState,
+          items: prevState.items.filter((prevArt) => prevArt.id !== articleId),
+        }));
+      } catch (err) {
+        console.log(err);
+      }
+    };
+  };
+
   return (
     <>
       {articles.isLoading ? (
         <Loader />
       ) : (
-        <Table responsive className={classes["list-container"]}>
+        <Table responsive="sm" className={classes["list-container"]}>
           <thead>
             <tr>
               <th>ID</th>
@@ -56,7 +76,6 @@ const ListArticles = (): JSX.Element => {
               <th>Autor</th>
               <th>Publicado</th>
               <th>Data Publicação</th>
-              <th>Ações</th>
             </tr>
           </thead>
           <tbody>
@@ -68,12 +87,12 @@ const ListArticles = (): JSX.Element => {
                 <td>{article.published ? "Publicado" : "Não Publicado"}</td>
                 <td>{article.published_at}</td>
                 <td>
-                  <Button variant="primary" size="sm">
-                    Visualizar
-                  </Button>
-                  <Button variant="danger" size="sm">
-                    Excluir
-                  </Button>
+                  <DropdownButton title="Ações" align="start" size="sm">
+                    <Dropdown.Item onClick={deleteArticleHandler(article.id)}>
+                      Excluir
+                    </Dropdown.Item>
+                    <Dropdown.Item>Visualizar</Dropdown.Item>
+                  </DropdownButton>
                 </td>
               </tr>
             ))}
