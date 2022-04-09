@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(
   cors({
     allowedHeaders: ['POST', 'GET', 'PUT', 'DELETE'],
-    origin: ['127.0.0.1:3000'],
+    origin: '*',
   })
 );
 app.use(express.urlencoded({ extended: false }));
