@@ -1,4 +1,4 @@
-import prisma from "services/prisma";
+import prisma from 'services/prisma';
 
 export class FindAllArticles {
   constructor() {}
@@ -10,7 +10,13 @@ export class FindAllArticles {
   }
 
   private async findAll() {
-    const articles = await prisma.article.findMany().catch((err) => console.error(err));
+    const articles = await prisma.article
+      .findMany({
+        where: {
+          is_active: true,
+        },
+      })
+      .catch((err) => console.error(err));
 
     return articles;
   }
