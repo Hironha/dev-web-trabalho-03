@@ -91,7 +91,6 @@ const ListArticles = (): JSX.Element => {
                     <Dropdown.Item onClick={deleteArticleHandler(article.id)}>
                       Excluir
                     </Dropdown.Item>
-                    <Dropdown.Item>Visualizar</Dropdown.Item>
                   </DropdownButton>
                 </td>
               </tr>

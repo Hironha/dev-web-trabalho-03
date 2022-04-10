@@ -20,6 +20,7 @@ const INIT_ARTICLE_VALUES: ArticleFormValues = {
   published: true,
 };
 
+
 const ArticleForm = (): JSX.Element => {
   const [articleValues, setArticleValues] = useState<ArticleFormValues>(INIT_ARTICLE_VALUES);
 
@@ -85,10 +86,12 @@ const ArticleForm = (): JSX.Element => {
         </Form.Group>
       </Row>
 
-      <Row className={`mb-3 ${classes["row"]}`}>
+      <Row className={`mb-3 ${classes["row"]} ${classes["date-input"]}`}>
         <Form.Group as={Col} controlId="articlePublished">
           <Form.Label>Data de Publicação</Form.Label>
-          <Form.Control type="date" onBlur={publishedAtBlurHandler} />
+          <Form.Control 
+          type="date" 
+          onBlur={publishedAtBlurHandler} />
         </Form.Group>
       </Row>
 
@@ -111,7 +114,7 @@ const ArticleForm = (): JSX.Element => {
       </Row>
 
       <Button variant="primary" type="submit">
-        Submit
+        Criar artigo
       </Button>
     </Form>
   );

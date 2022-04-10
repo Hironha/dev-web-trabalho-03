@@ -7,3 +7,7 @@
 .row  {
   max-width: 100%;
 }
+
+.date-input {
+  max-width: 200px;
+}
