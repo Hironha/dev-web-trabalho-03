@@ -1,6 +1,7 @@
 .form {
   max-width: 90%;
-  margin: 16px auto;
+  margin: 0 auto;
+  padding: 16px;
   overflow: hidden;
 }
 
