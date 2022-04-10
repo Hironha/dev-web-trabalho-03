@@ -1,0 +1,9 @@
+.form {
+  max-width: 90%;
+  margin: 16px auto;
+  overflow: hidden;
+}
+
+.row  {
+  max-width: 100%;
+}

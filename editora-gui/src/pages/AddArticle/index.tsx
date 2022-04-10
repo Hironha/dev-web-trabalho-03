@@ -1,6 +1,6 @@
 import React from "react";
 
-import ArticleForm from "./ArticleForm";
+import ArticleForm from "components/ArticleForm";
 
 const AddArticle = (): JSX.Element => {
   return (
