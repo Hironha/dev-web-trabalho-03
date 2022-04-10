@@ -26,6 +26,7 @@ export class UpdateArticleValidator {
 
   private getPossibleEntries(): Array<keyof UpdateArticleArg> {
     return [
+      'id',
       'author',
       'is_active',
       'published',
@@ -40,7 +41,7 @@ export class UpdateArticleValidator {
       {
         id: Yup.number().required(),
         published: Yup.boolean().notRequired(),
-        summary: Yup.string().nullable().notRequired(),
+        summary: Yup.string().notRequired(),
         title: Yup.string().notRequired(),
         author: Yup.string().notRequired(),
         published_at: Yup.date().notRequired(),
