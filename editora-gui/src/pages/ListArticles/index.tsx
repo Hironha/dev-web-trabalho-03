@@ -63,6 +63,16 @@ const ListArticles = (): JSX.Element => {
     };
   };
 
+  const getPublishedAtText = (date?: Date) => {
+    if (!date) return "Não publicado";
+
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const year = date.getFullYear();
+
+    return `${day}/${month}/${year}`;
+  };
+
   return (
     <>
       {articles.isLoading ? (
@@ -85,7 +95,9 @@ const ListArticles = (): JSX.Element => {
                 <td>{article.title}</td>
                 <td>{article.author}</td>
                 <td>{article.published ? "Publicado" : "Não Publicado"}</td>
-                <td>{article.published_at}</td>
+                <td>
+                  {getPublishedAtText(article.published_at && new Date(article.published_at))}
+                </td>
                 <td>
                   <DropdownButton title="Ações" align="start" size="sm">
                     <Dropdown.Item onClick={deleteArticleHandler(article.id)}>
