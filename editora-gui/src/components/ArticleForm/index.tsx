@@ -40,9 +40,10 @@ const ArticleForm = (): JSX.Element => {
   };
 
   const publishedAtChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const [year, month, day] = event.target.value.split("-");
     setArticleValues((prevState) => ({
       ...prevState,
-      published_at: event.target.value ? new Date(event.target.value) : undefined,
+      published_at: event.target.value ? new Date(+year, +month - 1, +day) : undefined,
     }));
   };
 
