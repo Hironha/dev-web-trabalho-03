@@ -20,7 +20,6 @@ const INIT_ARTICLE_VALUES: ArticleFormValues = {
   published: true,
 };
 
-
 const ArticleForm = (): JSX.Element => {
   const [articleValues, setArticleValues] = useState<ArticleFormValues>(INIT_ARTICLE_VALUES);
 
@@ -29,20 +28,14 @@ const ArticleForm = (): JSX.Element => {
   };
 
   const titleChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.target.value = event.target.value.trim();
-
     setArticleValues((prevState) => ({ ...prevState, title: event.target.value }));
   };
 
   const authorChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.target.value = event.target.value.trim();
-
     setArticleValues((prevState) => ({ ...prevState, author: event.target.value }));
   };
 
   const summaryChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.target.value = event.target.value.trim();
-
     setArticleValues((prevState) => ({ ...prevState, summary: event.target.value }));
   };
 
